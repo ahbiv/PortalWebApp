@@ -209,13 +209,13 @@ app.get('/login',
         response: res,                      // required
         resourceURL: config.resourceURL,    // optional. Provide a value if you want to specify the resource.
         customState: 'my_state',            // optional. Provide a value if you want to provide custom state value.
-        failureRedirect: '/' 
+        failureRedirect: '/failureRedirectLoginGet' 
       }
     )(req, res, next);
   },
   function(req, res) {
     log.info('Login was called in the Sample');
-    res.redirect('/');
+    res.redirect('/redirectLoginGet');
 });
 
 // 'GET returnURL'
@@ -227,13 +227,13 @@ app.get('/auth/openid/return',
     passport.authenticate('azuread-openidconnect', 
       { 
         response: res,                      // required
-        failureRedirect: '/failureRedirect'  
+        failureRedirect: '/failureRedirectGet'  
       }
     )(req, res, next);
   },
   function(req, res) {
     log.info('We received a return from AzureAD.');
-    res.redirect('/errorCallback');
+    res.redirect('/errorCallbackGet');
   });
 
 // 'POST returnURL'
@@ -245,13 +245,13 @@ app.post('/auth/openid/return',
     passport.authenticate('azuread-openidconnect', 
       { 
         response: res,                      // required
-        failureRedirect: '/failureRedirect'  
+        failureRedirect: '/failureRedirectPost'  
       }
     )(req, res, next);
   },
   function(req, res) {
     log.info('We received a return from AzureAD.');
-    res.redirect('/errorCallback');
+    res.redirect('/errorCallbackPost');
   });
 
 // 'logout' route, logout from passport, and destroy the session with AAD.
