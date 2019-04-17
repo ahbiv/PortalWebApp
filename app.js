@@ -227,13 +227,13 @@ app.get('/auth/openid/return',
     passport.authenticate('azuread-openidconnect', 
       { 
         response: res,                      // required
-        failureRedirect: '/'  
+        failureRedirect: '/failureRedirect'  
       }
     )(req, res, next);
   },
   function(req, res) {
     log.info('We received a return from AzureAD.');
-    res.redirect('/');
+    res.redirect('/errorCallback');
   });
 
 // 'POST returnURL'
@@ -245,13 +245,13 @@ app.post('/auth/openid/return',
     passport.authenticate('azuread-openidconnect', 
       { 
         response: res,                      // required
-        failureRedirect: '/'  
+        failureRedirect: '/failureRedirect'  
       }
     )(req, res, next);
   },
   function(req, res) {
     log.info('We received a return from AzureAD.');
-    res.redirect('/');
+    res.redirect('/errorCallback');
   });
 
 // 'logout' route, logout from passport, and destroy the session with AAD.
